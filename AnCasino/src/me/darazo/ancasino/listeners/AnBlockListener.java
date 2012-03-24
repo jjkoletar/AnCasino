@@ -5,9 +5,10 @@ import me.darazo.ancasino.slot.SlotMachine;
 
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockListener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public class AnBlockListener extends BlockListener {
+public class AnBlockListener implements Listener {
 	
 	protected AnCasino plugin;
 	
@@ -15,6 +16,7 @@ public class AnBlockListener extends BlockListener {
 		this.plugin = plugin;
 	}
 	
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		
 		// Check if plugin is enabled

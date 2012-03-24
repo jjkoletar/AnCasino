@@ -1,0 +1,32 @@
+<project name="AnCasino" default="build">
+	<target name="build" depends="versionname-jnk">
+		<mkdir dir="build"/>
+		<javac srcdir="src" destdir="build">
+			<classpath>
+				<fileset dir="lib">
+					<include name="*.jar"/>
+				</fileset>
+		    </classpath>
+		</javac>
+        <copy todir="build">
+                <fileset dir="src">
+                        <include name="*.yml"/>
+                </fileset>
+        </copy>
+        <jar jarfile="AnCasino.jar" basedir="build"/>
+        <jar jarfile="AnCasino-${jenkinsbuildnumber}.jar" basedir="build"/>
+	</target>
+	<target name="clearworkspace">
+		<delete>
+		    <fileset>
+		    	<include name="AnCasino*.jar"/>
+			</fileset>
+		</delete>
+	</target>
+	<target name="versionname-jnk">
+	    <replace dir="src">
+	    	<include name="**/*"/>
+	    	<replacefilter token="$version$" value="${jenkinsbuildnumber}"/>
+	    </replace>
+	</target>
+</project>
