@@ -1,5 +1,6 @@
 name: AnCasino
 main: me.darazo.ancasino.AnCasino
+author: jjkoletar, Darazo
 version: 2.0-b1-0.6-b$version$
 description: Real slot machines for your server.
 softdepend: [Vault]
