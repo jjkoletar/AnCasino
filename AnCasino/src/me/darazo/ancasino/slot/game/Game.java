@@ -10,7 +10,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 public class Game {
 
 	protected AnCasino plugin;
-	protected BukkitScheduler scheduler;
 
 	private SlotMachine slot;
 	private Player player;
@@ -42,7 +41,7 @@ public class Game {
 	// Plays the game.
 	public void play() {
 
-		this.scheduler = plugin.getServer().getScheduler();
+		BukkitScheduler scheduler = plugin.getServer().getScheduler();
 		Integer[] task = new Integer[3];
 		Long[] delay = { 60L, 80L, 100L };
 
