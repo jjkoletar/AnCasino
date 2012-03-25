@@ -5,14 +5,14 @@ import org.bukkit.entity.Player;
 import me.darazo.ancasino.AnCasino;
 
 public class Casino extends AnCommand {
-	
+
 	public Casino(AnCasino plugin, String[] args, Player player) {
 		super(plugin, args, player);
 	}
-	
+
 	public Boolean process() {
-		
-		if(plugin.permission.isAdmin(player)) {
+
+		if (plugin.permission.isAdmin(player)) {
 			sendMessage("Command guide:");
 			sendMessage("/casino add - Add a new slot machine");
 			sendMessage("/casino addmanaged - Add a new managed slot machine");
@@ -23,8 +23,8 @@ public class Casino extends AnCommand {
 			sendMessage("/casino stats - Global usage statistics");
 			sendMessage("/casino type - Manage slot machine types");
 		}
-		
-		else if(plugin.permission.canCreate(player)) {
+
+		else if (plugin.permission.canCreate(player)) {
 			sendMessage("Command guide:");
 			sendMessage("/casino add - Add a new slot machine");
 			sendMessage("/casino addmanaged - Add a new managed slot machine");
@@ -32,13 +32,13 @@ public class Casino extends AnCommand {
 			sendMessage("/casino list - List slot machines and types");
 			sendMessage("/casino remove - Remove an existing slot machine");
 		}
-		
+
 		else {
 			noPermission();
 		}
-		
+
 		return true;
-		
+
 	}
 
 }

@@ -8,50 +8,54 @@ import me.darazo.ancasino.slot.SlotMachine;
 import me.darazo.ancasino.slot.Type;
 
 public class CasinoList extends AnCommand {
-	
+
 	public CasinoList(AnCasino plugin, String[] args, Player player) {
 		super(plugin, args, player);
 	}
-	
+
 	public Boolean process() {
-		
+
 		// Admin permission
-		if(!plugin.permission.canCreate(player)) {
+		if (!plugin.permission.canCreate(player)) {
 			noPermission();
 			return true;
 		}
-		
+
 		// Valid command format
-		if(args.length == 2) {
-			
+		if (args.length == 2) {
+
 			// List slot machines
-			if(args[1].equalsIgnoreCase("slots")) {
-				
+			if (args[1].equalsIgnoreCase("slots")) {
+
 				sendMessage("Registered slot machines:");
-				for(SlotMachine slot : plugin.slotData.getSlots()) {
-					
+				for (SlotMachine slot : plugin.slotData.getSlots()) {
+
 					// If not admin, list only owned by player
-					if(isOwner(slot)) {
+					if (isOwner(slot)) {
 						Block b = slot.getController();
-						String c = b.getX()+ "," +b.getY()+ "," +b.getZ();
-						sendMessage(slot.getName() + " - type: " + slot.getType() + " - owner: " + slot.getOwner() + " - managed: " + slot.isManaged().toString() +" @ " + c);
+						String c = b.getX() + "," + b.getY() + "," + b.getZ();
+						sendMessage(slot.getName() + " - type: "
+								+ slot.getType() + " - owner: "
+								+ slot.getOwner() + " - managed: "
+								+ slot.isManaged().toString() + " @ " + c);
 					}
 				}
 			}
-			
+
 			// List types
-			else if(args[1].equalsIgnoreCase("types")) {
-				
+			else if (args[1].equalsIgnoreCase("types")) {
+
 				sendMessage("Available types:");
-				for(Type type : plugin.typeData.getTypes()) {
-					
+				for (Type type : plugin.typeData.getTypes()) {
+
 					// If not admin, list only permitted types
-					if(plugin.permission.canCreate(player, type)) {
-						sendMessage(type.getName() + " - cost: " + type.getCost());
+					if (plugin.permission.canCreate(player, type)) {
+						sendMessage(type.getName() + " - cost: "
+								+ type.getCost());
 					}
 				}
 			}
-			
+
 			// Invalid args
 			else {
 				sendMessage("Usage:");
@@ -59,7 +63,7 @@ public class CasinoList extends AnCommand {
 				sendMessage("/casino list types - List types");
 			}
 		}
-		
+
 		// Incorrect command format
 		else {
 			sendMessage("Usage:");

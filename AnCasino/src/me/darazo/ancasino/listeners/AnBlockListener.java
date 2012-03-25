@@ -9,39 +9,39 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class AnBlockListener implements Listener {
-	
+
 	protected AnCasino plugin;
-	
+
 	public AnBlockListener(AnCasino plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		
+
 		// Check if plugin is enabled
-		if(plugin.isEnabled()) {
-			
+		if (plugin.isEnabled()) {
+
 			// Slot protection enabled
-			if(plugin.configData.protection) {
-				
+			if (plugin.configData.protection) {
+
 				Block b = event.getBlock();
-				
+
 				// Look for match in slots
-				for(SlotMachine slot : plugin.slotData.getSlots()) {
-					
-					for(Block current : slot.getBlocks()) {
-						
+				for (SlotMachine slot : plugin.slotData.getSlots()) {
+
+					for (Block current : slot.getBlocks()) {
+
 						// Match found, cancel event
-						if(b.equals(current)) {
+						if (b.equals(current)) {
 							event.setCancelled(true);
 							return;
 						}
 					}
-					
+
 					// Check controller as well
 					Block current = slot.getController();
-					if(b.equals(current)) {
+					if (b.equals(current)) {
 						event.setCancelled(true);
 						return;
 					}
