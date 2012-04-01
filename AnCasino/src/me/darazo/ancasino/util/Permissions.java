@@ -22,34 +22,35 @@ public class Permissions {
 
 	// Returns true if player has admin permissions
 	public boolean isAdmin(Player player) {
-		return player.isOp() || player.hasPermission(admin);
+		return player.isOp() || plugin.vaultPerms.has(player, admin);
 	}
 
 	// Returns true if player can create slots
 	public boolean canCreate(Player player) {
-		return isAdmin(player) || player.hasPermission(create);
+		return isAdmin(player) || plugin.vaultPerms.has(player, create);
 	}
 
 	// Returns true if player can create slots with the type
 	public boolean canCreate(Player player, Type type) {
 		return isAdmin(player)
-				|| player.hasPermission(create + "." + type.getName());
+				|| plugin.vaultPerms.has(player, create + "." + type.getName());
 	}
 
 	// Returns true if player can create slots with the type
 	public boolean canCreate(Player player, String type) {
-		return isAdmin(player) || player.hasPermission(create + "." + type);
+		return isAdmin(player)
+				|| plugin.vaultPerms.has(player, create + "." + type);
 	}
 
 	// Returns true if the player can manage slot machines
 	public boolean canManage(Player player) {
-		return isAdmin(player) || player.hasPermission(manage);
+		return isAdmin(player) || plugin.vaultPerms.has(player, manage);
 	}
 
 	// Returns true if the player can use the type
 	public boolean canUse(Player player, Type type) {
 		return isAdmin(player)
-				|| player.hasPermission(use + "." + type.getName());
+				|| plugin.vaultPerms.has(player, use + "." + type.getName());
 	}
 
 	public boolean isOwner(Player player, SlotMachine slot) {

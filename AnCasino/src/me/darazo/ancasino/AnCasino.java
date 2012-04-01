@@ -35,6 +35,7 @@ public class AnCasino extends JavaPlugin {
 	public StatData statsData = new StatData(this);
 	public RewardData rewardData = new RewardData(this);
 	public Permissions permission = new Permissions(this);
+	public net.milkbowl.vault.permission.Permission vaultPerms;
 
 	public Economy economy = null;
 	public final Logger logger = Logger.getLogger("Minecraft");
@@ -88,6 +89,12 @@ public class AnCasino extends JavaPlugin {
 								+ " An economy plugin is required in order to use this plugin.");
 				pm.disablePlugin(this);
 			}
+			if (!setupPermissions()) {
+				this.logger
+						.warning(prefix
+								+ " Unable to use Vault for perms! Try using a real perms plugin.");
+				pm.disablePlugin(this);
+			}
 		}
 
 	}
@@ -112,6 +119,16 @@ public class AnCasino extends JavaPlugin {
 		}
 
 		return (economy != null);
+	}
+
+	private boolean setupPermissions() {
+		RegisteredServiceProvider<net.milkbowl.vault.permission.Permission> permissionProvider = getServer()
+				.getServicesManager().getRegistration(
+						net.milkbowl.vault.permission.Permission.class);
+		if (permissionProvider != null) {
+			vaultPerms = permissionProvider.getProvider();
+		}
+		return vaultPerms != null;
 	}
 
 }
